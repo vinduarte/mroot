@@ -75,7 +75,8 @@ public class MedidorDeRaiz implements ActionListener {
         informationText.setText("Passo 1:\nConfigure parametros iniciais,"
                 + "\nPrimeiro horizontalmente,\ndepois verticalmente."
                 + "\n\n\n\n\nAutor: Vinícius Duarte Lopes"
-                + "\nEmail: vin.duartelopes@gmail.com\n"
+                + "\nEmail: vin.duartelopes@gmail.com" 
+                + "\nCelular: (31) 98841-8467\n"
                 + "Versão de Teste Inicial");
         // otherPanel.add(informationText);
 
