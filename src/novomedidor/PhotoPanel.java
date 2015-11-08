@@ -127,6 +127,7 @@ public class PhotoPanel extends JPanel {
     }
     
     public void setTransfBaixo() {
+        // Qual é o limite aqui?
         if (transfPosY > -2000.0) {
             transfPosY += 25.0;
         }
@@ -142,7 +143,7 @@ public class PhotoPanel extends JPanel {
 
     public PhotoPanel() {
         escala = 1.0;
-        transfPosX = transfPosY = 50.0;
+        transfPosX = transfPosY = 0.0;
         semImagem = new javax.swing.JLabel();
         semImagem.setText("NENHUMA IMAGEM CARREGADA");
         semImagem.setForeground(Color.red);
@@ -155,7 +156,6 @@ public class PhotoPanel extends JPanel {
             floorPlan = ImageIO.read(new File("images/gray.jpg"));
             this.remove(semImagem);
         } catch (IOException ex) {
-            // ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao carregar imagem.\n");
         }
     }
@@ -171,7 +171,6 @@ public class PhotoPanel extends JPanel {
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 
         if (floorPlan != null) {
-            //g2d.drawImage(floorPlan, 0, 0, this.getWidth(), this.getHeight(), this);
             //colocando a posicao inicial na tela e pegando uma instancia do transformador
             AffineTransform at = AffineTransform.
                     getTranslateInstance(transfPosX, transfPosY);
@@ -198,7 +197,6 @@ public class PhotoPanel extends JPanel {
             floorPlan = ImageIO.read(f);
             this.remove(semImagem);
         } catch (IOException ex) {
-            //Logger.getLogger(PhotoPanel.class.getName()).log(Level.SEVERE, null, ex);
             this.add(semImagem);
         }
         this.repaint();
@@ -210,17 +208,6 @@ public class PhotoPanel extends JPanel {
         public void mousePressed(MouseEvent e) {
             Point p = e.getPoint();
             double tamanho;
-            /*
-             // Original
-             if (!drawing) {
-             path = new GeneralPath();
-             path.moveTo(p.x, p.y);
-             drawing = true;
-             } else {
-             path.lineTo(p.x, p.y);
-             //drawing = false;
-             }
-             */
             if (!normalizerFinished) {
                 if (!drawing) {
                     pathNormalizer = new GeneralPath();
@@ -258,7 +245,6 @@ public class PhotoPanel extends JPanel {
                         path.lineTo(p.x, p.y);
                         tamanho = Math.sqrt((p.x - previous.x) * (p.x - previous.x)
                                 + (p.y - previous.y) * (p.y - previous.y));
-                        //System.out.println("Tamanho em pixels: " + tamanho);
                         newLine = true;
                         // Adicionando nova linha
                         lineList.add(new MyLine(previous, p));
@@ -274,7 +260,6 @@ public class PhotoPanel extends JPanel {
     }
 
     public void pixelToCentimetersConfig() {
-        //System.out.println("" + pixX + " " + pixY);
         if (pixX != 0 && pixY != 0) {
             propX = (double) pixX / normalizerX;
             propY = (double) pixY / normalizerY;
@@ -297,7 +282,6 @@ public class PhotoPanel extends JPanel {
 
         pixelToCentimetersConfig();
         for (MyLine m : lineList) {
-            // System.out.println("" + propX + " " + propY);
             distX = (m.getP2().getX() - m.getP1().getX()) / propX;
             distY = (m.getP1().getY() - m.getP2().getY()) / propY;
             dist = Math.sqrt(distX * distX + distY * distY);

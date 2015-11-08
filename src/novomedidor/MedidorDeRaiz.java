@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package novomedidor;
 
 import java.awt.Dimension;
@@ -18,11 +13,8 @@ import javax.swing.JTextArea;
 
 /*
  PROXIMO
- Zoom no panel
- Traducao
+ Editor de escalas - para zoom e direção
 
- Embelezar!!!!
- 
  */
 /**
  *
@@ -30,9 +22,6 @@ import javax.swing.JTextArea;
  */
 public class MedidorDeRaiz implements ActionListener {
 
-    /**
-     * @param args the command line arguments
-     */
     private final MotherFrame frame;
     private final PhotoPanel photoPanel;
     private final JPanel otherPanel;
@@ -66,8 +55,7 @@ public class MedidorDeRaiz implements ActionListener {
         otherPanel.setPreferredSize(gDimension);
         loadPicture = new JButton("Carregar Imagem");
         loadPicture.addActionListener(this);
-        //otherPanel.add(loadPicture);
-
+        
         loadNormalizers = new JButton("Config. x, y");
         loadNormalizers.addActionListener(this);
 
@@ -82,7 +70,6 @@ public class MedidorDeRaiz implements ActionListener {
                 + "\nEmail: vin.duartelopes@gmail.com"
                 + "\nCelular: (31) 98841-8467\n"
                 + "Versão de Teste Inicial");
-        // otherPanel.add(informationText);
 
         tFieldValorX = new TextField(18);
         tFieldValorY = new TextField(18);
@@ -91,9 +78,6 @@ public class MedidorDeRaiz implements ActionListener {
         photoPanel.setNormalizerX(10.0);
         photoPanel.setNormalizerY(10.0);
 
-        // otherPanel.add(tFieldValorX);
-        // otherPanel.add(tFieldValorY);
-        // otherPanel.add(loadNormalizers);
         reset = new JButton("Reset");
         reset.addActionListener(this);
 
@@ -266,14 +250,6 @@ public class MedidorDeRaiz implements ActionListener {
             informationText.setText("Configurados X e Y\n"
                     + "X: " + photoPanel.getNormalizerX() + "\n"
                     + "Y: " + photoPanel.getNormalizerY() + "\n");
-            /*
-             + "PixX: " + photoPanel.getPixX() + "\n"
-             + "PixY: " + photoPanel.getPixY() + "\n"
-             + "PropX: " + photoPanel.getPropX() + "\n"
-             + "PropY: " + photoPanel.getPropY() + "\n"
-             + "Lista:\n" + photoPanel.printLineList() + "\n"
-             + "Resultado:\n" + photoPanel.calculateInCentimeters())
-             ;*/
         } else if (e.getSource() == reset) {
             photoPanel.reset();
             informationText.setText("Medições reiniciadas"
@@ -292,12 +268,8 @@ public class MedidorDeRaiz implements ActionListener {
                 informationText.setText("Não há resultados\npara serem mostrados.");
             }
         } else if (e.getSource() == zoomMais) {
-            //System.out.println("Cliquei MAIS");
             photoPanel.escalaMais();
-            //informationText.setText("CHOLA MAIS");
         } else if (e.getSource() == zoomMenos) {
-            //System.out.println("Cliquei MENOS");
-            //informationText.setText("CHOLA MENOS");
             photoPanel.escalaMenos();
         } else if (e.getSource() == zoomOriginal) {
             photoPanel.setEscalaDefault();
