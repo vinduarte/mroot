@@ -13,7 +13,7 @@ public class MotherFrame extends JFrame {
     private MotherFrame(){
         super.setTitle("Medidor de Raiz");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setBounds(0, 0, 920, 840);
         this.setVisible(true);
     }
     
