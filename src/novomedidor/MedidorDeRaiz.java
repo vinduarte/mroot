@@ -128,9 +128,13 @@ public class MedidorDeRaiz implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
 
         jButtonBaixo.setText("↓");
+        jButtonBaixo.addActionListener(this);
         jButtonCima.setText("↑");
+        jButtonCima.addActionListener(this);
         jButtonEsquerda.setText("←");
+        jButtonEsquerda.addActionListener(this);
         jButtonDireita.setText("→");
+        jButtonDireita.addActionListener(this);
         jLabel4.setText("Direção:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(otherPanel);
@@ -248,6 +252,8 @@ public class MedidorDeRaiz implements ActionListener {
                 photoPanel.reset();
                 informationText.setText("Medições reiniciadas"
                         + "\nProceda ao passo 1 novamente."
+                        + "\nPasso 1:\nConfigure parametros iniciais,"
+                        + "\nPrimeiro horizontalmente,\ndepois verticalmente."
                         + "\n\n\n\n\nAutor: Vinícius Duarte Lopes"
                         + "\nEmail: vin.duartelopes@gmail.com\n"
                         + "Versão de Teste Inicial");
@@ -272,6 +278,8 @@ public class MedidorDeRaiz implements ActionListener {
             photoPanel.reset();
             informationText.setText("Medições reiniciadas"
                     + "\nProceda ao passo 1 novamente."
+                    + "\nPasso 1:\nConfigure parametros iniciais,"
+                    + "\nPrimeiro horizontalmente,\ndepois verticalmente."
                     + "\n\n\n\n\nAutor: Vinícius Duarte Lopes"
                     + "\nEmail: vin.duartelopes@gmail.com\n"
                     + "Versão de Teste Inicial");
@@ -284,15 +292,23 @@ public class MedidorDeRaiz implements ActionListener {
                 informationText.setText("Não há resultados\npara serem mostrados.");
             }
         } else if (e.getSource() == zoomMais) {
-            System.out.println("Cliquei MAIS");
+            //System.out.println("Cliquei MAIS");
             photoPanel.escalaMais();
             //informationText.setText("CHOLA MAIS");
         } else if (e.getSource() == zoomMenos) {
-            System.out.println("Cliquei MENOS");
+            //System.out.println("Cliquei MENOS");
             //informationText.setText("CHOLA MENOS");
             photoPanel.escalaMenos();
         } else if (e.getSource() == zoomOriginal) {
             photoPanel.setEscalaDefault();
+        } else if(e.getSource() == jButtonEsquerda){
+            photoPanel.setTransfEsquerda();
+        } else if(e.getSource() == jButtonDireita){
+            photoPanel.setTransfDireita();
+        } else if(e.getSource() == jButtonBaixo){
+            photoPanel.setTransfBaixo();
+        } else if(e.getSource() == jButtonCima){
+            photoPanel.setTransfCima();
         }
     }
 }

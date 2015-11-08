@@ -27,12 +27,12 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author viniciusduarte
- * 
- * 
+ *
+ *
  * LINK QUE VI PARA ESCALA
- * 
+ *
  * http://www.coderanch.com/t/338284/GUI/java/zoom-zoom-picture-swing
- * 
+ *
  * google: java zooming image
  */
 public class PhotoPanel extends JPanel {
@@ -52,6 +52,8 @@ public class PhotoPanel extends JPanel {
     List<MyLine> lineList = new ArrayList<>();
     private JLabel semImagem;
     private double escala;
+    private final double INDICE_ESCALA = 0.05;
+    private double transfPosX, transfPosY;
 
     public int getPixX() {
         return pixX;
@@ -87,25 +89,60 @@ public class PhotoPanel extends JPanel {
 
     public void escalaMais() {
         if (escala < 10.0) {
-            escala += 0.05;
+            escala += INDICE_ESCALA;
         }
         repaint();
     }
 
     public void escalaMenos() {
         if (escala > 0.0) {
-            escala -= 0.05;
+            escala -= INDICE_ESCALA;
         }
         repaint();
     }
 
-    public void setEscalaDefault(){
+    public void setEscalaDefault() {
         escala = 1.0;
         repaint();
     }
+
+    public void setTransfDefault() {
+        transfPosX = 0.0;
+        transfPosY = 0.0;
+    }
+
+    public void setTransfEsquerda() {
+        if (transfPosX > 0.0) {
+            transfPosX -= 25.0;
+        }
+        repaint();
+    }
     
+    public void setTransfDireita(){
+        // Qual é o limite aqui?
+        if (transfPosX < 2000.0) { 
+            transfPosX += 25.0;
+        }
+        repaint();
+    }
+    
+    public void setTransfBaixo() {
+        if (transfPosY > -2000.0) {
+            transfPosY += 25.0;
+        }
+        repaint();
+    }
+    
+    public void setTransfCima() {
+        if (transfPosY > 0.0) {
+            transfPosY -= 25.0;
+        }
+        repaint();
+    }
+
     public PhotoPanel() {
         escala = 1.0;
+        transfPosX = transfPosY = 50.0;
         semImagem = new javax.swing.JLabel();
         semImagem.setText("NENHUMA IMAGEM CARREGADA");
         semImagem.setForeground(Color.red);
@@ -136,8 +173,9 @@ public class PhotoPanel extends JPanel {
         if (floorPlan != null) {
             //g2d.drawImage(floorPlan, 0, 0, this.getWidth(), this.getHeight(), this);
             //colocando a posicao inicial na tela e pegando uma instancia do transformador
-            AffineTransform at = AffineTransform.getTranslateInstance(0, 0);
-            //double escala = 0.05 / 100.0;
+            AffineTransform at = AffineTransform.
+                    getTranslateInstance(transfPosX, transfPosY);
+            //double escala = INDICE_ESCALA / 100.0;
             //double sx = ((double) floorPlan.getWidth()) * escala ;
             //double sy = ((double) floorPlan.getHeight()) * escala;
             at.scale(escala, escala);
